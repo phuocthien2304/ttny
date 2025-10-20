@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 20/10 - Ngày Phụ nữ Việt Nam</title>
+    <style>
+        /* CSS cho toàn bộ trang */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #ffdde1, #ff9a9e); /* Nền màu hồng gradient */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Ẩn thanh cuộn khi có hiệu ứng rơi */
+            position: relative;
+        }
+
+        /* CSS cho phần chữ */
+        .header-text {
+            color: #832b35; /* Màu chữ đậm */
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng chữ */
+        }
+
+        .main-message {
+            color: #d10042; /* Màu đỏ nổi bật */
+            font-size: 5em;
+            font-weight: 900;
+            text-align: center;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            cursor: default;
+            /* Hiệu ứng lấp lánh (Sparkle Effect) */
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 15px #ff007f, 0 0 20px #ff007f;
+            }
+            100% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff007f, 0 0 30px #ff007f, 0 0 40px #ff007f;
+            }
+        }
+
+        .date-text {
+            color: #333;
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        /* Container cho hiệu ứng cánh hoa rơi */
+        .petal-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Cho phép tương tác với nội dung bên dưới */
+            z-index: 1; /* Đảm bảo cánh hoa nằm dưới chữ */
+        }
+
+        /* Định nghĩa kiểu cánh hoa */
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(255, 192, 203, 0.8); /* Màu hồng nhạt */
+            border-radius: 50%;
+            opacity: 0; /* Ban đầu ẩn */
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+            animation: fall linear infinite; /* Hiệu ứng rơi */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, -100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 100vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* CSS cho hình ảnh/biểu tượng (Tùy chọn) */
+        .image-placeholder {
+            margin-top: 30px;
+            font-size: 4em;
+            color: #d10042;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="petal-container"></div>
+    
+    <div style="z-index: 2; position: relative;"> 
+        <div class="header-text">Kính chúc em, một nửa thế giới của anh có ngày 20/10 luôn rạng ngời!</div>
+        <div class="main-message">HAPPY WOMEN'S DAY</div>
+        <div class="date-text">20 Tháng 10</div>
+        
+        <div class="image-placeholder">
+            💖 💐 🌹
+        </div>
+    </div>
+
+    <script>
+        // JavaScript tạo hiệu ứng cánh hoa rơi
+        const petalContainer = document.querySelector('.petal-container');
+        const numPetals = 50; // Số lượng cánh hoa
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            // Vị trí và kích thước ngẫu nhiên
+            const size = Math.random() * 10 + 5; // Kích thước từ 5px đến 15px
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${Math.random() * 100}vw`; // Vị trí ngang ngẫu nhiên
+            
+            // Thời gian và độ trễ ngẫu nhiên cho animation
+            const duration = Math.random() * 8 + 5; // Thời gian rơi từ 5s đến 13s
+            const delay = Math.random() * 10; // Độ trễ bắt đầu từ 0s đến 10s
+
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+
+            petalContainer.appendChild(petal);
+            
+            // Xóa cánh hoa sau khi rơi để tối ưu bộ nhớ
+            setTimeout(() => {
+                petal.remove();
+                createPetal(); // Tạo cánh hoa mới để duy trì hiệu ứng liên tục
+            }, (duration + delay) * 1000);
+        }
+
+        // Tạo cánh hoa ban đầu
+        for (let i = 0; i < numPetals; i++) {
+            createPetal();
+        }
+    </script>
+</body>
+</html>
